@@ -15,6 +15,11 @@ class ListSongs extends HTMLElement {
     generateSongsHTML() {
         const songs = [
             {
+                title: 'Scroll-Animation',
+                artist: 'Code Explanation',
+                cover: 'assets/code.jpg'
+            },
+            {
                 title: 'After Dark',
                 artist: 'Mr.Kitty',
                 cover: 'assets/after-dark.jpg'
@@ -67,15 +72,24 @@ class ListSongs extends HTMLElement {
         ];
 
         return songs
-            .map(
-                (song) => `
-                <li class="song" data-title="${song.title}" data-artist="${song.artist}" data-cover="${song.cover}">
-                    <a href="inspect-song/inspect-song.html">
-                        <img src="${song.cover}" alt="${song.title} - ${song.artist}">
-                    </a>
-                </li>
-            `
-            )
+            .map((song, index) => {
+                if (index === 0) {
+                    return `
+                        <li class="song" data-title="${song.title}" data-artist="${song.artist}" data-cover="${song.cover}">
+                            <a href="inspect-song/inspect-song.html">
+                                <img src="${song.cover}" alt="${song.title} - ${song.artist}">
+                            </a>
+                        </li>
+                    `;
+                }
+                return `
+                    <li class="song" data-title="${song.title}" data-artist="${song.artist}" data-cover="${song.cover}">
+                        <a>
+                            <img src="${song.cover}" alt="${song.title} - ${song.artist}">
+                        </a>
+                    </li>
+                `;
+            })
             .join('');
     }
 
